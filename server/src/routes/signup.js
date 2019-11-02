@@ -13,7 +13,7 @@ const validation = validateRequest({
 router.post('/signup', validation, async (req, res, next) => {
   const { username, password } = req.body
   try {
-    // const token = await attemptLogin(username, password)
+    const token = await attemptLogin(username, password)
     res.cookie(
       'token',
       token,
