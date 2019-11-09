@@ -14,6 +14,7 @@ module.exports = {
   target: 'web',
   devServer: {
     port: 3000,
+    open: true,
     contentBase: './dist',
   },
   entry: {

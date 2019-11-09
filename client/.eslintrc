@@ -8,6 +8,8 @@
   "rules": {
     "max-len": "off",
     "react/jsx-filename-extension": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
     "semi": ["error", "never"]
   },
   "settings": {
