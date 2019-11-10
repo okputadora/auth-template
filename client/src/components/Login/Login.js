@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Formik, Field } from 'formik'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import Form from '@/components/Forms/Form'
@@ -24,16 +25,19 @@ class Login extends Component {
         onSubmit={this.handleSubmit}
       >
         {({ isSubmitting, dirty }) => (
-          <Form>
+          <>
             <h1>Login</h1>
-            <Field name="username">
-              {(props) => <input {...props.field} />}
-            </Field>
-            <Field name="password">
-              {(props) => <input {...props.field} />}
-            </Field>
-            <button className="testClass" type="submit" disabled={!dirty || isSubmitting}>submit</button>
-          </Form>
+            <Form>
+              <Field name="username">
+                {(props) => <input {...props.field} />}
+              </Field>
+              <Field name="password">
+                {(props) => <input {...props.field} />}
+              </Field>
+              <button className="testClass" type="submit" disabled={!dirty || isSubmitting}>submit</button>
+            </Form>
+            <Link to="signup">Signup</Link>
+          </>
         )}
       </Formik>
     )

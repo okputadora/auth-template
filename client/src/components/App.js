@@ -1,8 +1,8 @@
 import React from 'react'
-import LogIn from '@/components/Login/Login'
+import Router from './Router'
 
-const App = () => (
-  <div><LogIn /></div>
-)
+import '@/styles/base.scss'
+
+const App = () => <Router />
 
 export default App
