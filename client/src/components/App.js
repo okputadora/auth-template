@@ -1,5 +1,5 @@
 import React from 'react'
-import LogIn from '@/components/Login'
+import LogIn from '@/components/Login/Login'
 
 const App = () => (
   <div><LogIn /></div>

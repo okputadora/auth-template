@@ -1,7 +1,8 @@
-const path = require('path')
+const merge = require('webpack-merge')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const common = require('./webpack.common.js')
 
 // HtmlWebpackPlugin is used to inject our created bundles into this html file so // we need to create it.
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
@@ -10,48 +11,19 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   inject: 'body',
 })
 
-module.exports = {
-  target: 'web',
+module.exports = merge(common, {
   devServer: {
     port: 3000,
     open: true,
     contentBase: './dist',
   },
-  entry: {
-    app: ['./src/index.js'],
-    vendor: ['react', 'react-dom'],
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'js/[name].bundle.js',
-  },
   devtool: 'source-map',
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /(node_modules)/,
-        use: ['babel-loader'], // we use this to transpile es6 code on the web
-      },
-      {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader', 'postcss-loader',
-        ],
-      },
-    ],
-  },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'styles.css',
-      chunkFilename: 'styles.css',
-    }),
     HtmlWebpackPluginConfig,
     new webpack.NoEmitOnErrorsPlugin(),
   ],
   mode: 'development',
-}
+})

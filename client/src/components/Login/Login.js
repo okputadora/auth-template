@@ -3,6 +3,7 @@ import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 
 import Form from '@/components/Forms/Form'
+import './login.scss'
 // import PropTypes from 'prop-types'
 
 const schema = Yup.object().shape({
@@ -29,7 +30,7 @@ class Login extends Component {
             <Field name="password">
               {(props) => <input {...props.field} />}
             </Field>
-            <button type="submit" disabled={!dirty || isSubmitting}>submit</button>
+            <button className="testClass" type="submit" disabled={!dirty || isSubmitting}>submit</button>
           </Form>
         )}
       </Formik>
