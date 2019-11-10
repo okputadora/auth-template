@@ -4,16 +4,16 @@ import * as Yup from 'yup'
 
 import Form from '@/components/Forms/Form'
 import * as auth from '@/api/auth'
-import './login.scss'
+import './signup.scss'
 // import PropTypes from 'prop-types'
 
 const schema = Yup.object().shape({
   username: Yup.string().email().required(),
   password: Yup.string().required(),
 })
-class Login extends Component {
+class Signup extends Component {
   handleSubmit = (values) => {
-    auth.login(values)
+    auth.Signup(values)
   }
 
   render() {
@@ -25,7 +25,7 @@ class Login extends Component {
       >
         {({ isSubmitting, dirty }) => (
           <Form>
-            <h1>Login</h1>
+            <h1>Signup</h1>
             <Field name="username">
               {(props) => <input {...props.field} />}
             </Field>
@@ -40,4 +40,4 @@ class Login extends Component {
   }
 }
 
-export default Login
+export default Signup

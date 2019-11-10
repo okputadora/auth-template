@@ -11,7 +11,7 @@ import {
   signup,
 } from './routes'
 
-const { port, mongoURI } = config.default.core
+const { port, mongoURI, clientAddress } = config.default.core
 const app = express()
 
 mongoose.connect(
@@ -25,6 +25,13 @@ mongoose.connect(
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+
+// CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', clientAddress)
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
 app.use('/login', login)
 app.use('/logout', logout)

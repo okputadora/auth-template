@@ -1,0 +1,12 @@
+{
+  "name": "auth-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd ./server && npm run dev\" \"cd ./client && npm run dev\""
+  },
+  "dependencies": {
+    "concurrently": "^5.0.0"
+  }
+}

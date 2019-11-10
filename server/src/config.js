@@ -9,7 +9,7 @@ const {
   MONGO_URI,
 } = process.env
 
-
+const IS_DEV = NODE_ENV === 'development'
 export default {
   default: {
     // Core related settings
@@ -20,6 +20,7 @@ export default {
       engine: 10.16,
       env: NODE_ENV,
       mongoURI: MONGO_URI,
+      clientAddress: IS_DEV ? 'http://localhost:3000' : '', // @TODO prod url
 
       // CORS
       cors: {
