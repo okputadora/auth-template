@@ -9,4 +9,14 @@ export const login = (credentials) => (
   })
 )
 
+export const signup = (credentials) => (
+  request({
+    method: 'POST',
+    url: '/signup',
+    authenticated: false,
+    data: credentials,
+  })
+)
+
+
 export default {}

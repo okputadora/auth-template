@@ -3,6 +3,8 @@
   "rules": {
     "semi": ["error", "never"],
     "max-len": "off",
-    "arrow-parens": "off"
+    "arrow-parens": "off",
+    "no-underscore-dangle": "off",
+    "func-names": "off"
   }
 }

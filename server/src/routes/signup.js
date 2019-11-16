@@ -1,26 +1,30 @@
 import { Router } from 'express'
 import Joi from '@hapi/joi'
+import bcrypt from 'bcrypt'
 
-import { validateRequest } from '../utils'
+import { validateRequest, issueToken } from '../utils'
+import User from '../models/user'
 
 const router = Router()
 
 const validation = validateRequest({
-  accountId: Joi.string().required().label('Account ID'),
-  oauthToken: Joi.string().required().label('OAuth Token'),
+  username: Joi.string().required(),
+  password: Joi.string().required(),
 })
 
-router.post('/signup', validation, async (req, res, next) => {
-  const { username, password } = req.body
+router.post('/', async (req, res) => {
+  console.log('are we here????')
   try {
-    const token = await attemptLogin(username, password)
-    res.cookie(
-      'token',
-      token,
-      { expires: new Date(Date.now() + 900000), httpOnly: true }
-    )
-  } catch (err) {
-    throw Error(err)
+    console.log(req.body)
+    const { username, password } = req.body
+    const hashedPassword = await bcrypt.hash(password, 8)
+    const user = User.create({ username, password: hashedPassword })
+    issueToken(user, res)
+    console.log(res.cookie)
+    res.json({ user })
+  } catch (e) {
+    console.log(e)
+    throw new Error(e)
   }
 })
 

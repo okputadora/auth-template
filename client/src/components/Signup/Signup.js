@@ -3,7 +3,7 @@ import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 
 import Form from '@/components/Forms/Form'
-import * as auth from '@/api/auth'
+import { signup } from '@/api/auth'
 import './signup.scss'
 // import PropTypes from 'prop-types'
 
@@ -12,9 +12,7 @@ const schema = Yup.object().shape({
   password: Yup.string().required(),
 })
 class Signup extends Component {
-  handleSubmit = (values) => {
-    auth.Signup(values)
-  }
+  handleSubmit = (values) => signup(values)
 
   render() {
     return (

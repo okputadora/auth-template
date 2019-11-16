@@ -1,7 +1,9 @@
 import { Router } from 'express'
 import Joi from '@hapi/joi'
+import bcrypt from 'bcrypt'
 
-import { validateRequest } from '../utils'
+import { validateRequest, issueToken } from '../utils'
+import User from '../models/user'
 
 const router = Router()
 
@@ -11,7 +13,16 @@ const validation = validateRequest({
 })
 
 router.post('/', validation, async (req, res) => {
-  console.log('body: ', req.body)
+  try {
+    const { username, password } = req
+    const hashedPassword = await bcrypt.hash(password, 8)
+    const user = User.create({ username, password: hashedPassword })
+    issueToken(user, res)
+    // console.log(res.cookie)
+    res.json({ user })
+  } catch (e) {
+    throw new Error(e)
+  }
   res.json({ success: true })
   // const { username, password } = req.body
   // try {

@@ -2,14 +2,18 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const {
+export const {
   NODE_ENV,
   SERVER_ADDRESS,
   PORT,
   MONGO_URI,
+  SECRET,
 } = process.env
 
-const IS_DEV = NODE_ENV === 'development'
+export const IS_DEV = NODE_ENV === 'dev'
+export const IN_PROD = NODE_ENV === 'production'
+
+console.log(NODE_ENV)
 export default {
   default: {
     // Core related settings
