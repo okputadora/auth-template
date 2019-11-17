@@ -32,6 +32,7 @@ const corsOptions = {
   origin: '*',
 }
 app.use(cors(corsOptions))
+console.log('does this work????!!!?')
 //   console.log({ clientAddress })
 //   res.header('Access-Control-Allow-Origin', clientAddress)
 //   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
@@ -47,11 +48,15 @@ app.use('/logout', logout)
 const server = app.listen(port, () => logger.log({ level: 'info', message: `Example app listening on port ${port}!` }))
 
 // For Development Only @TODO this is not working right now
-process.on('SIGUSR2', () => {
-  console.log('1')
-  server.close(() => {
-    process.kill(process.pid, 'SIGUSR2')
+process.once('SIGUSR2', () => {
+  // gracefulShutdown(function () {
+  console.log('killing proces@!!')
+  process.kill(process.pid, 'SIGUSR2')
+  // });
+})
+process.on('SIGINT', () => {
+  console.log(process.pid); server.close(() => {
+    console.log('server closed!')
+    process.exit()
   })
 })
-
-process.on('SIGINT', () => { console.log(process.pid); process.kill(process.pid); server.close(() => process.exit()) })
